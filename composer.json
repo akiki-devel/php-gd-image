@@ -1,22 +1,7 @@
 {
-	"name": "akiki-devel/gdimage",
-	"description": "gd image library",
-   "keywords": ["gd", "image"],
-	"homepage": "https://github.com/akiki-devel/php-gd-image#readme",
-	"type": "library",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "akiki",
-			"homepage": "http://akiki0106.hatenablog.com/"
-		}
-	],
-	"support": {
-		"issues": "https://github.com/akiki-devel/php-gd-image/issues",
-		"source": "https://github.com/akiki-devel/php-gd-image"
-	},
-	"require": {
-		"php": ">=5.4.0",
-		"lib-pcre": "*"
-	}
+   "name": "akikidevel/gdimage",
+   "require": {
+	  "php": ">=5.4.0",
+	  "ext-gd": "*"
+   }
 }
