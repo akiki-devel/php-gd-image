@@ -1,5 +1,5 @@
 {
-	"name": "akiki/gdimage",
+	"name": "akiki-devel/gdimage",
 	"description": "gd image library",
    "keywords": ["gd", "image"],
 	"homepage": "https://github.com/akiki-devel/php-gd-image#readme",
