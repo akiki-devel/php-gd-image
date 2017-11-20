@@ -1,6 +1,7 @@
 <?php
 
-namespace akiki\gd;
+// namespace akiki\gd;
+namespace akikidevel\gdimage;
 
 class Image
 {
