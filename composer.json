@@ -1,5 +1,6 @@
 {
    "name": "akikidevel/gdimage",
+   "license": "MIT",
    "require": {
 	  "php": ">=5.4.0",
 	  "ext-gd": "*"
