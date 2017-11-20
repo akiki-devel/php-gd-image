@@ -1,8 +1,20 @@
 {
    "name": "akikidevel/gdimage",
+   "type": "library",
    "license": "MIT",
+   "authors": [
+	  {
+		 "name": "akiki",
+		 "email": "akiki-devel@yahoo.co.jp"
+	  }
+   ],
    "require": {
 	  "php": ">=5.4.0",
 	  "ext-gd": "*"
+   },
+   "autoload": {
+	  "psr-4": {
+		 "akiki\\gd\\" : "/"
+	  }
    }
 }
