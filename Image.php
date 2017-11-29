@@ -2,6 +2,13 @@
 
 namespace akiki\gd;
 
+// require "bmp.php";
+// require "bmp2.php";
+// require "bmp3.php";
+require "ImageBmp.php";
+
+use akiki\gd\bmp;
+
 class Image
 {
 	private $img = null;
@@ -56,6 +63,24 @@ class Image
 		case 'image/gif':
 			$this->img = imagecreatefromgif($file);
 			break;
+		case 'image/x-ms-bmp':
+			// $this->img = ImageCreateFromBMP($file);
+			$this->img = ImageCreateFromBMP($file);
+			break;
+			// ? image/bmp
+			// ? image/x-bmp
+			// ? image/x-bitmap
+			// ? image/x-xbitmap
+			// ? image/x-win-bitmap
+			// ? image/x-windows-bmp
+			// ? image/ms-bmp
+			// o image/x-ms-bmp
+			// ? application/bmp
+			// ? application/x-bmp
+			// ? application/x-win-bitmap
+		default:
+			echo 'Error: ' . $file . ':' . $info['mime'] . " not compatible\n";
+			exit(1);
 		}
 		$this->size();
 	}
@@ -91,7 +116,13 @@ class Image
 
 	public
 	function clear($r = 0.0, $g = 0.0, $b = 0.0, $a = 0.0) {
-		imagefill($this->img, 0, 0, $this->packColor($r, $g, $b, $a));
+		imagealphablending($this->img, false);
+		$rect = $this->getRect();
+		$col  = $this->packColor($r, $g, $b, $a);
+		ImageFilledRectangle($this->img,
+									0, 0, $rect->width, $rect->height,
+									$col);
+		imagealphablending($this->img, true);
 	}
 
 	public
@@ -571,6 +602,11 @@ class Image
 	function isPixel($x, $y) {
 		return ((ImageColorAt($this->img, $x, $y) >> 24) & 0x7f) != 127 ? 1 : 0;
 	}
+
+	public
+	function shapeFill($x, $y) {
+		ImageFill($this->img, $x, $y, $this->shapeColor);
+	}
 	
 	public // アルファ抜き画像の輪郭画像
 	function shapeOutlinesImage() {
@@ -643,8 +679,8 @@ class Image
 		if (gettype($rectOcx) == "object") {
 			$cx = $rectOcx->x;
 			$cy = $rectOcx->y;
-			$width  = $cx + $rectOcx->width;
-			$height = $cy + $rectOcx->height;
+			$width  = $rectOcx->width;
+			$height = $rectOcx->height;
 		}
 		$fill ?
 			ImageFilledEllipse($this->img, $cx, $cy, $width, $height, $this->shapeColor) :
@@ -667,6 +703,25 @@ class Image
 			ImageFilledPolygon($this->img, $vs, count($vs) / 2, $this->shapeColor) :
 			ImagePolygon($this->img, $vs, count($vs) / 2, $this->shapeColor);
 	}
-	
+
+	public
+	function replaceColor($rgba, $torgba = null) {
+		$col = $this->packColor($rgba);
+		$tocol = $torgba ?
+			$this->packColor($torgba):
+			$this->packColor(); // ragba 0,0,0,0
+
+		imagealphablending($this->img, false);
+		for ($y = 0; $y < $this->height; $y++) {
+			for ($x = 0; $x < $this->width; $x++) {
+				 $ncol = ImageColorAt($this->img, $x, $y);
+				 if ($ncol == $col) {
+					 ImageSetPixel($this->img, $x, $y, $tocol);
+				 }
+			}
+		}
+		imagealphablending($this->img, true);
+	}
+
 	
 }
