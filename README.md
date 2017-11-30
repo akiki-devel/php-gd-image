@@ -50,6 +50,7 @@
 * [rotateHue()](#rotateHue)
 * [setHue()](#setHue)
 * [setSaturation()](#setSaturation)
+* [replaceColor()](#replaceColor)
 
 図形描画  
 
@@ -250,6 +251,15 @@ GDリソースオブジェクトを得る(PHP GDの関数を直接呼び出し�
 	// 以下の２行でセピア調になる
 	$image->setSaturation(0.45);
 	$image->setHue(30);
+
+### <a name="replaceColor"> void replaceColor($rgba, $torgba = null)
+$rgbaのカラーと同じpixelを$torgbaのカラーに置き換える
+
+	// 画像 0,0 のカラーを取得して透明にして置き換える
+	$rgba   = $image->getRgba();
+	$torgba = $image->getRgba();
+	$torgba->a = 0.0;
+	$image->replaceColor($rgba, $torgba);
 
 ### <a name="setShapeColor"> void setShapeColor($rOrgb = 0.0, $g = 0.0, $b = 0.0, $a = 1.0)
 shapeXXX() 図形を描くメソッドで使用するカラーを設定する
