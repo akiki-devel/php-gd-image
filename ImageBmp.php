@@ -2,8 +2,6 @@
 
 namespace akiki\gd\bmp;
 
-use akiki\gd\bmp;
-
 class File {
 	private $file;
 	private $name;

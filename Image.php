@@ -2,12 +2,7 @@
 
 namespace akiki\gd;
 
-// require "bmp.php";
-// require "bmp2.php";
-// require "bmp3.php";
 require "ImageBmp.php";
-
-use akiki\gd\bmp;
 
 class Image
 {
@@ -65,7 +60,7 @@ class Image
 			break;
 		case 'image/x-ms-bmp':
 			// $this->img = ImageCreateFromBMP($file);
-			$this->img = ImageCreateFromBMP($file);
+			$this->img = bmp\ImageCreateFromBMP($file);
 			break;
 			// ? image/bmp
 			// ? image/x-bmp
